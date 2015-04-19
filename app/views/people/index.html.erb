@@ -1,0 +1,35 @@
+<h1>List of Employees</h1>
+<div ng-app="app">
+  <div ng-controller="peopleCtrl" ng-init="fetchData()">
+
+    <lable> Filter by name</lable>
+    <input ng-model="nameFilter" list="names">
+
+    <datalist id+"names">
+      <option ng-repeat= "employee in employees">{{employee.first_name}}</option>
+    </datalist>
+
+    <button ng-click="changeOrder('name')">Order by name</button>
+
+    <button ng-click="changeOrder('title')">Order by title</button>
+    <table ng-repeat="employee in employees | filter: {name: nameFilter} | orderBy: orderByAttribute:descending">
+      <tr>
+       <td ng-click="toggleVisible(employee)">{{employee.first_name}}</td>
+       <hr>
+       <td> {{employee.last_name}}</td>
+       <td ng-if="employee.titleVisible">{{employee.title}}</td>
+      </tr>
+    </table>
+
+
+    <div id= "form">
+      <div id='errors'>
+        <p ng-repeat='error in errors'>{{error}}</p>
+      </div>
+      Name: <input ng-model="newEmployeeName">
+      Title: <input ng-modle="newEmployeeTitle">
+      <button ng-click="addEmployee(newEmployeeName, newEmployeeTitle)">Add Employee </button>
+    </div>
+  </div>
+</div
+
